@@ -2,6 +2,7 @@ const apiKey = config.APIKey; //pulls API key from seperate file.
 
 const searchButton = document.getElementById('searchButton');
 const searchBox = document.getElementById('searchBox');
+let searchOutputContainer = document.getElementById('searchOutputContainer');
 
 searchButton.addEventListener('click', () => {
     let searchQuery = searchBox.value;
@@ -10,8 +11,7 @@ searchButton.addEventListener('click', () => {
     }
 
     retrieveDataFromAPI(searchQuery);
-    
-})
+});
 
 function retrieveDataFromAPI(movieTitle){
     //Fetch request will go here.
@@ -21,10 +21,16 @@ function retrieveDataFromAPI(movieTitle){
         redirect: 'follow'
     };
 
-    fetch('https://imdb-api.com/en/API/Search/' + apiKey + '/' + movieTitle, requestOptions)
+   return fetch('https://imdb-api.com/en/API/Search/' + apiKey + '/' + movieTitle, requestOptions)
         .then(response => response.text())
-        .then(result => console.log(result))
+        .then(result => {
+            console.log(result)
+            outputSearchResults(result);
+        })
         .catch(error => console.log('error', error));
-
 };
 
+function outputSearchResults (results) {
+    let outputText = results;
+    searchOutputContainer.append(results);
+}
