@@ -1,12 +1,16 @@
 const apiKey = config.APIKey; //pulls API key from seperate file.
 
+
+//Document variables
 const searchButton = document.getElementById('searchButton');
 const searchBox = document.getElementById('searchBox');
 let searchOutputContainer = document.getElementById('searchOutputContainer');
 
+
+
 searchButton.addEventListener('click', () => {
     let searchQuery = searchBox.value;
-    if (!searchQuery){
+    if (!searchQuery){ //Verify input is not null or undefined.
         alert("Invalid search. Is the search bar empty?");
     }
 
@@ -14,8 +18,6 @@ searchButton.addEventListener('click', () => {
 });
 
 function retrieveDataFromAPI(movieTitle){
-    //Fetch request will go here.
-    // let search = fetch("https://imdb-api.com/en/API/Search/" + apiKey + "/" + movieTitle);
     let requestOptions = {
         method: 'GET',
         redirect: 'follow'
