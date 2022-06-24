@@ -26,13 +26,19 @@ function retrieveDataFromAPI(movieTitle){
    return fetch('https://imdb-api.com/en/API/Search/' + apiKey + '/' + movieTitle, requestOptions)
         .then(response => response.text())
         .then(result => {
-            console.log(result)
-            outputSearchResults(result);
+            // console.log(result)
+            outputSearchResults(JSON.parse(result));
         })
         .catch(error => console.log('error', error));
 };
 
-function outputSearchResults (results) {
-    let outputText = results;
-    searchOutputContainer.append(results);
+
+
+function outputSearchResults (queryResults) {
+    let outputPosterSrc = queryResults.results[0].image;
+    let outputPoster = document.createElement('img');
+    outputPoster.src = outputPosterSrc;
+
+    searchOutputContainer.append(outputPoster);
+    console.log(outputPosterSrc)
 }
