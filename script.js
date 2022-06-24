@@ -1,10 +1,16 @@
 const apiKey = config.APIKey; //pulls API key from seperate file.
 
 const searchButton = document.getElementById('searchButton');
+const searchBox = document.getElementById('searchBox');
 
 searchButton.addEventListener('click', () => {
-    console.log(this.value);
-    console.log(retrieveDataFromAPI("Blade"));
+    let searchQuery = searchBox.value;
+    if (!searchQuery){
+        alert("Invalid search. Is the search bar empty?");
+    }
+
+    retrieveDataFromAPI(searchQuery);
+    
 })
 
 function retrieveDataFromAPI(movieTitle){
