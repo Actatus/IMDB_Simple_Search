@@ -1,3 +1,7 @@
+/*IMDB Simple's goal is to use the API access from imdb-api.com to search IMDB's database and retrieve
+    search's title and movie. The project should use vanilla JS to accomplish this.
+*/
+
 const apiKey = config.APIKey; //pulls API key from seperate file.
 
 
@@ -26,19 +30,32 @@ function retrieveDataFromAPI(movieTitle){
    return fetch('https://imdb-api.com/en/API/Search/' + apiKey + '/' + movieTitle, requestOptions)
         .then(response => response.text())
         .then(result => {
-            // console.log(result)
-            outputSearchResults(JSON.parse(result));
+            let searchParserResults = searchParser(JSON.parse(result));
+            // outputSearchResults(JSON.parse(result));
+            outputSearchResults(searchParserResults);
         })
         .catch(error => console.log('error', error));
 };
 
+function searchParser(searchQuery){
+    //Will check that errorMessage is empty, then pull image sources and titles.
+    
+    let queryResultsObject = {}; //Will store as 0 : { title: ..., imageSrc: ...}, 1 : {....}, etc
+    for (let i = 0; i < searchQuery.results.length; i++){
+        queryResultsObject[i] = {
+            title: searchQuery.results[i].title,
+            imgSrc: searchQuery.results[i].image
+        };
+    };
 
+    return queryResultsObject;
+}
 
 function outputSearchResults (queryResults) {
-    let outputPosterSrc = queryResults.results[0].image;
-    let outputPoster = document.createElement('img');
-    outputPoster.src = outputPosterSrc;
+    let mainPosterSrc = queryResults[0].imgSrc;
+    let mainPoster = document.createElement('img');
+    mainPoster.src = mainPosterSrc;
 
-    searchOutputContainer.append(outputPoster);
-    console.log(outputPosterSrc)
+    searchOutputContainer.append(mainPoster);
+    console.log(queryResults)
 }
