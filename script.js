@@ -30,16 +30,24 @@ function retrieveDataFromAPI(movieTitle){
    return fetch('https://imdb-api.com/en/API/Search/' + apiKey + '/' + movieTitle, requestOptions)
         .then(response => response.text())
         .then(result => {
-            let searchParserResults = searchParser(JSON.parse(result));
+            searchParser(JSON.parse(result));
             // outputSearchResults(JSON.parse(result));
-            outputSearchResults(searchParserResults);
         })
         .catch(error => console.log('error', error));
 };
 
+function checkValidSearch(searchQuery){
+    if (searchQuery.errorMessage != '' || searchQuery.results.length == 0) {
+        return false;
+    }
+}
+
 function searchParser(searchQuery){
     //Will check that errorMessage is empty, then pull image sources and titles.
-    
+    if (checkValidSearch(searchQuery) == false){
+        alert("There was an error in your search. Maybe what you're looking for doesn't exist?");
+        return false; //Search must be invalid, should not pass down to output functions.
+    }
     let queryResultsObject = {}; //Will store as 0 : { title: ..., imageSrc: ...}, 1 : {....}, etc
     for (let i = 0; i < searchQuery.results.length; i++){
         queryResultsObject[i] = {
@@ -48,7 +56,7 @@ function searchParser(searchQuery){
         };
     };
 
-    return queryResultsObject;
+    outputSearchResults(queryResultsObject);
 }
 
 function outputSearchResults (queryResults) {
