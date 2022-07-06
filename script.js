@@ -70,16 +70,40 @@ function outputSearchResults (queryResults) {
     let mainPosterContainer = document.createElement('section');
     mainPosterContainer.id = "mainPosterContainer";
 
-    let mainPosterSrc = queryResults[0].imgSrc;
     let mainPosterElement = document.createElement('img');
-    mainPosterElement.src = mainPosterSrc;
+    mainPosterElement.src = queryResults[0].imgSrc;
 
-    let mainTitle = queryResults[0].title + " " + queryResults[0].year;
     let mainTitleElement = document.createElement('h2');
+    let mainTitle = queryResults[0].title + " " + queryResults[0].year;
     mainTitleElement.textContent = mainTitle;
 
     searchOutputContainer.append(mainPosterLink);
     mainPosterLink.append(mainPosterElement);
     mainPosterLink.append(mainTitleElement);
     console.log(queryResults);
+
+    let seeAlso = document.createElement('h3');
+    seeAlso.textContent = "Not what you were looking for? See also: ";
+    searchOutputContainer.append(seeAlso);
+
+    for(let i = 1; i < queryResults.length || i < 6; i++){
+        let altPosterLink = document.createElement('a');
+        altPosterLink.href = 'https://www.imdb.com/title/' + queryResults[i].imdbID;
+
+        let altPosterContainer = document.createElement('section');
+        altPosterContainer.classList.add('altPosterContainer');
+
+        let altPosterElement = document.createElement('img');
+        altPosterElement.src = queryResults[i].imgSrc;
+
+        let altTitleElement = document.createElement('h3');
+        let altTitle = queryResults[i].title + " " + queryResults[i].year;
+        altTitleElement.textContent = altTitle;
+
+        searchOutputContainer.append(altPosterLink);
+        altPosterLink.append(altPosterElement);
+        altPosterLink.append(altTitleElement);
+    }
+
+
 }
