@@ -53,8 +53,8 @@ function searchParser(searchQuery){
         queryResultsObject[i] = {
             title: searchQuery.results[i].title,
             year: searchQuery.results[i].description,
-            imgSrc: searchQuery.results[i].image
-
+            imgSrc: searchQuery.results[i].image,
+            imdbID : searchQuery.results[i].id
         };
     };
     console.log(searchQuery.results[0]);
@@ -62,6 +62,13 @@ function searchParser(searchQuery){
 }
 
 function outputSearchResults (queryResults) {
+    //Use the first result to output a "hero" element, then several smaller alternates.
+    //Each element should link back to its own IMDB page.
+    let mainPosterLink = document.createElement('a');
+    mainPosterLink.href = "https://www.imdb.com/title/" + queryResults[0].imdbID;
+
+    let mainPosterContainer = document.createElement('section');
+    mainPosterContainer.id = "mainPosterContainer";
 
     let mainPosterSrc = queryResults[0].imgSrc;
     let mainPosterElement = document.createElement('img');
@@ -71,7 +78,8 @@ function outputSearchResults (queryResults) {
     let mainTitleElement = document.createElement('h2');
     mainTitleElement.textContent = mainTitle;
 
-    searchOutputContainer.append(mainPosterElement);
-    searchOutputContainer.append(mainTitleElement);
+    searchOutputContainer.append(mainPosterLink);
+    mainPosterLink.append(mainPosterElement);
+    mainPosterLink.append(mainTitleElement);
     console.log(queryResults);
 }
