@@ -52,18 +52,26 @@ function searchParser(searchQuery){
     for (let i = 0; i < searchQuery.results.length; i++){
         queryResultsObject[i] = {
             title: searchQuery.results[i].title,
+            year: searchQuery.results[i].description,
             imgSrc: searchQuery.results[i].image
+
         };
     };
-
+    console.log(searchQuery.results[0]);
     outputSearchResults(queryResultsObject);
 }
 
 function outputSearchResults (queryResults) {
-    let mainPosterSrc = queryResults[0].imgSrc;
-    let mainPoster = document.createElement('img');
-    mainPoster.src = mainPosterSrc;
 
-    searchOutputContainer.append(mainPoster);
-    console.log(queryResults)
+    let mainPosterSrc = queryResults[0].imgSrc;
+    let mainPosterElement = document.createElement('img');
+    mainPosterElement.src = mainPosterSrc;
+
+    let mainTitle = queryResults[0].title + " " + queryResults[0].year;
+    let mainTitleElement = document.createElement('h2');
+    mainTitleElement.textContent = mainTitle;
+
+    searchOutputContainer.append(mainPosterElement);
+    searchOutputContainer.append(mainTitleElement);
+    console.log(queryResults);
 }
