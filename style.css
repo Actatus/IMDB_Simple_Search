@@ -61,6 +61,11 @@ header {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    text-decoration: none;
+}
+
+.alternateOutputContainer section a:hover {
+    text-decoration: underline;
 }
 
 .alternateOutputContainer section a img {
@@ -91,6 +96,7 @@ header {
     .alternateOutputContainer {
         flex-direction: row;
         justify-content: space-evenly;
+        column-gap: 2%;
        
     }
 
