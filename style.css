@@ -1,0 +1,42 @@
+body{
+    background-color: #eee;
+}
+
+.mainOutputContainer{
+    width: 100%;
+    height: 25%;
+}
+
+.mainOutputContainer a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    clear: right;
+    text-decoration: none;
+}
+
+.mainOutputContainer a img {
+    width: auto;
+    height: auto;
+}
+
+#searchOutputContainer > h3 {
+    text-align: center;
+}
+
+@media only screen and (min-width: 1024px) {
+
+    .mainOutputContainer a:hover {
+        text-decoration:underline;
+    }
+
+    .mainOutputContainer img {
+        width: auto;
+        height: auto;
+       
+    }
+
+    
+
+}
