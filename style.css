@@ -6,12 +6,15 @@ header {
     text-align: center;
 }
 
-.searchInputContainer {
+#searchInputContainer {
     display: flex;
     justify-content: center;
+    column-gap: 2%;
+    height: 2em;
+
 }
 
-.searchInputContainer input {
+#searchInputContainer input {
     flex-grow: .5;
 }
 
@@ -72,30 +75,44 @@ header {
     background-color: #ddd;
 }
 
-@media only screen and (min-width: 1024px) {
+
+@media screen and (min-width: 1024px) {
 
     .mainOutputContainer a:hover {
-        text-decoration:underline;
+        text-decoration: underline;
     }
 
     .mainOutputContainer a img {
         width: auto;
         height: auto;
+
+    }
+
+    .alternateOutputContainer {
+        flex-direction: row;
+        justify-content: space-evenly;
        
     }
 
-    .alternateOutputContainer{
-        flex-direction: row;
+    .alternateOutputContainer section {
+        flex-basis: 20%;
+        padding-top: 1%;
     }
 
-    .alternateOutputContainer section {
-        display: block;
+    .alternateOutputContainer section a {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
-    
-    .altPosterContainer img {
+
+    .alternateOutputContainer section a img {
         width: auto;
-        max-width: auto;
         height: auto;
+        max-width: 100%;
+    }
+
+    .alternateOutputContainer section a h3 {
+        text-align: center;
     }
 
 }
