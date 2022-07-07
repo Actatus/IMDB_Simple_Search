@@ -18,11 +18,39 @@ body{
 
 .mainOutputContainer a img {
     width: auto;
+    max-width: 100%;
     height: auto;
 }
 
 #searchOutputContainer > h3 {
     text-align: center;
+}
+
+.alternateOutputContainer {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    row-gap: 1em;
+}
+
+
+
+.alternateOutputContainer::before{
+    clear: left;
+}
+
+.alternateOutputContainer section a {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.alternateOutputContainer section a img {
+    height: 20%;
+    width: 20%;
+    max-height: 250px;
+    max-width: 200px;
+    margin-right: 5%;
 }
 
 @media only screen and (min-width: 1024px) {
@@ -31,12 +59,24 @@ body{
         text-decoration:underline;
     }
 
-    .mainOutputContainer img {
+    .mainOutputContainer a img {
         width: auto;
         height: auto;
        
     }
 
+    .alternateOutputContainer{
+        flex-direction: row;
+    }
+
+    .alternateOutputContainer section {
+        display: block;
+    }
     
+    .altPosterContainer img {
+        width: auto;
+        max-width: auto;
+        height: auto;
+    }
 
 }
