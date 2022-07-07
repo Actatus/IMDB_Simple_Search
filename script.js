@@ -69,6 +69,7 @@ function outputSearchResults (queryResults) {
 
     let mainPosterContainer = document.createElement('section');
     mainPosterContainer.id = "mainPosterContainer";
+    mainPosterContainer.classList.add('mainOutputContainer');
 
     let mainPosterElement = document.createElement('img');
     mainPosterElement.src = queryResults[0].imgSrc;
@@ -77,7 +78,8 @@ function outputSearchResults (queryResults) {
     let mainTitle = queryResults[0].title + " " + queryResults[0].year;
     mainTitleElement.textContent = mainTitle;
 
-    searchOutputContainer.append(mainPosterLink);
+    searchOutputContainer.append(mainPosterContainer);
+    mainPosterContainer.append(mainPosterLink);
     mainPosterLink.append(mainPosterElement);
     mainPosterLink.append(mainTitleElement);
     console.log(queryResults);
@@ -85,6 +87,11 @@ function outputSearchResults (queryResults) {
     let seeAlso = document.createElement('h3');
     seeAlso.textContent = "Not what you were looking for? See also: ";
     searchOutputContainer.append(seeAlso);
+
+    let alternateOutputContainer = document.createElement('section');
+    alternateOutputContainer.classList.add('alternateOutputContainer');
+
+    searchOutputContainer.append(alternateOutputContainer);
 
     for(let i = 1; i < queryResults.length || i < 6; i++){
         let altPosterLink = document.createElement('a');
@@ -100,7 +107,8 @@ function outputSearchResults (queryResults) {
         let altTitle = queryResults[i].title + " " + queryResults[i].year;
         altTitleElement.textContent = altTitle;
 
-        searchOutputContainer.append(altPosterLink);
+        alternateOutputContainer.append(altPosterContainer);
+        altPosterContainer.append(altPosterLink);
         altPosterLink.append(altPosterElement);
         altPosterLink.append(altTitleElement);
     }
