@@ -72,7 +72,7 @@ function outputSearchResults (queryResults) {
                     mainPosterElement
                     mainTitleElement
     */
-   
+
     let mainPosterLink = document.createElement('a');
     mainPosterLink.href = "https://www.imdb.com/title/" + queryResults[0].imdbID;
 
@@ -117,6 +117,10 @@ function outputSearchResults (queryResults) {
         let altPosterContainer = document.createElement('section');
         altPosterContainer.classList.add('altPosterContainer');
 
+        if (i % 2 == 1) {
+            altPosterContainer.classList.add('alternatingRow');
+        }
+
         let altPosterElement = document.createElement('img');
         altPosterElement.src = queryResults[i].imgSrc;
 
@@ -129,9 +133,8 @@ function outputSearchResults (queryResults) {
         altPosterLink.append(altPosterElement);
         altPosterLink.append(altTitleElement);
 
-        if(i % 2 == 0){
-            altOutputContainer.classList.add('alternatingRow');
-        }
+        console.log(" I: " + i + " %2 = " + i%2);
+       
     }
 
 
