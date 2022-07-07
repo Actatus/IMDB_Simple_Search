@@ -64,6 +64,15 @@ function searchParser(searchQuery){
 function outputSearchResults (queryResults) {
     //Use the first result to output a "hero" element, then several smaller alternates.
     //Each element should link back to its own IMDB page.
+
+    /*
+        searchOutputContainer
+            mainPosterContainer
+                mainPosterLink
+                    mainPosterElement
+                    mainTitleElement
+    */
+   
     let mainPosterLink = document.createElement('a');
     mainPosterLink.href = "https://www.imdb.com/title/" + queryResults[0].imdbID;
 
@@ -94,6 +103,14 @@ function outputSearchResults (queryResults) {
     searchOutputContainer.append(alternateOutputContainer);
 
     for(let i = 1; i < queryResults.length || i < 6; i++){
+        /*
+        alternateOutputContainer 
+            altPosterContainer
+                altPosterLink(a)
+                    altPosterElement
+                    altTitleElement
+        */
+
         let altPosterLink = document.createElement('a');
         altPosterLink.href = 'https://www.imdb.com/title/' + queryResults[i].imdbID;
 
@@ -111,6 +128,10 @@ function outputSearchResults (queryResults) {
         altPosterContainer.append(altPosterLink);
         altPosterLink.append(altPosterElement);
         altPosterLink.append(altTitleElement);
+
+        if(i % 2 == 0){
+            altOutputContainer.classList.add('alternatingRow');
+        }
     }
 
 
