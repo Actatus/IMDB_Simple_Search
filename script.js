@@ -17,7 +17,7 @@ searchButton.addEventListener('click', () => {
     if (!searchQuery){ //Verify input is not null or undefined.
         alert("Invalid search. Is the search bar empty?");
     }
-
+    removePreviousResults();
     retrieveDataFromAPI(searchQuery);
 });
 
@@ -50,9 +50,13 @@ function searchParser(searchQuery){
     }
     let queryResultsObject = {}; //Will store as 0 : { title: ..., imageSrc: ...}, 1 : {....}, etc
     for (let i = 0; i < searchQuery.results.length; i++){
+        //Descriptions sometimes output with alt translations, e.g The Dark Knight ->
+        // El caballero de la noche. While this can be helpful in some cases e.g Tezz -> "Fast", removing
+        //this may be more useful to the user.
+        let descriptionRegExp = searchQuery.results[i].description.replace(/\s(aka).*/, ""); 
         queryResultsObject[i] = {
             title: searchQuery.results[i].title,
-            year: searchQuery.results[i].description,
+            year: descriptionRegExp,
             imgSrc: searchQuery.results[i].image,
             imdbID : searchQuery.results[i].id
         };
@@ -136,6 +140,11 @@ function outputSearchResults (queryResults) {
         console.log(" I: " + i + " %2 = " + i%2);
        
     }
+}
 
-
+function removePreviousResults () {
+    const searchOutputContainerElement = document.getElementById('searchOutputContainer');
+    while (searchOutputContainerElement.firstChild){
+        searchOutputContainerElement.removeChild(searchOutputContainerElement.firstChild);
+    }
 }
