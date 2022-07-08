@@ -8,7 +8,7 @@ const apiKey = config.APIKey; //pulls API key from seperate file.
 //Document variables
 const searchButton = document.getElementById('searchButton');
 const searchBox = document.getElementById('searchBox');
-let searchOutputContainer = document.getElementById('searchOutputContainer');
+const searchOutputContainer = document.getElementById('searchOutputContainer');
 
 
 
@@ -31,7 +31,6 @@ function retrieveDataFromAPI(movieTitle){
         .then(response => response.text())
         .then(result => {
             searchParser(JSON.parse(result));
-            // outputSearchResults(JSON.parse(result));
         })
         .catch(error => console.log('error', error));
 };
@@ -61,7 +60,6 @@ function searchParser(searchQuery){
             imdbID : searchQuery.results[i].id
         };
     };
-    console.log(searchQuery.results[0]);
     outputSearchResults(queryResultsObject);
 }
 
@@ -95,7 +93,6 @@ function outputSearchResults (queryResults) {
     mainPosterContainer.append(mainPosterLink);
     mainPosterLink.append(mainPosterElement);
     mainPosterLink.append(mainTitleElement);
-    console.log(queryResults);
 
     let seeAlso = document.createElement('h3');
     seeAlso.textContent = "Not what you were looking for? See also: ";
@@ -135,16 +132,12 @@ function outputSearchResults (queryResults) {
         alternateOutputContainer.append(altPosterContainer);
         altPosterContainer.append(altPosterLink);
         altPosterLink.append(altPosterElement);
-        altPosterLink.append(altTitleElement);
-
-        console.log(" I: " + i + " %2 = " + i%2);
-       
+        altPosterLink.append(altTitleElement);       
     }
 }
 
 function removePreviousResults () {
-    const searchOutputContainerElement = document.getElementById('searchOutputContainer');
-    while (searchOutputContainerElement.firstChild){
-        searchOutputContainerElement.removeChild(searchOutputContainerElement.firstChild);
+    while (searchOutputContainer.firstChild){
+        searchOutputContainer.removeChild(searchOutputContainer.firstChild);
     }
 }
