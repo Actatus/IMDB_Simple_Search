@@ -1,3 +1,9 @@
+/* To-Do:
+    Revise to use vh and vw, reducing desktop display to 1 page. 
+    Solidify color scheme, improve page visuals.
+*/
+
+
 body {
     background-color: #eee;
 }
