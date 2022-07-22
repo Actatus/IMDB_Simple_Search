@@ -21,6 +21,18 @@ searchButton.addEventListener('click', () => {
     retrieveDataFromAPI(searchQuery);
 });
 
+searchBox.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter'){
+        console.log('fired');
+        let searchQuery = searchBox.value;
+        if (!searchQuery) { //Verify input is not null or undefined.
+            alert("Invalid search. Is the search bar empty?");
+        }
+        removePreviousResults();
+        retrieveDataFromAPI(searchQuery);
+    }
+})
+
 function retrieveDataFromAPI(movieTitle){
     let requestOptions = {
         method: 'GET',
@@ -57,6 +69,7 @@ function searchParser(searchQuery){
             title: searchQuery.results[i].title,
             year: descriptionRegExp,
             imgSrc: searchQuery.results[i].image,
+            imgAlt: "IMDB poster for " + searchQuery.results[i].title + descriptionRegExp,
             imdbID : searchQuery.results[i].id
         };
     };
@@ -84,6 +97,7 @@ function outputSearchResults (queryResults) {
 
     let mainPosterElement = document.createElement('img');
     mainPosterElement.src = queryResults[0].imgSrc;
+    mainPosterElement.alt = queryResults[0].imgAlt;
 
     let mainTitleElement = document.createElement('h2');
     let mainTitle = queryResults[0].title + " " + queryResults[0].year;
@@ -124,6 +138,7 @@ function outputSearchResults (queryResults) {
 
         let altPosterElement = document.createElement('img');
         altPosterElement.src = queryResults[i].imgSrc;
+        altPosterElement.alt = queryResults[i].imgAlt;
 
         let altTitleElement = document.createElement('h3');
         let altTitle = queryResults[i].title + " " + queryResults[i].year;
