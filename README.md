@@ -30,6 +30,5 @@ const config = {
                 "errorMessage": ""
 ```
 To-Do:
-- Generate basic alt-text for posters to improve accessibility. 
 - Improve styling. Currently incredibly basic and could use some care.
 - Possibly add a movie/tv show toggle. Currently gets both, may make the search more accurate.
