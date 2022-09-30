@@ -23,7 +23,6 @@ searchButton.addEventListener('click', () => {
 
 searchBox.addEventListener('keypress', function (e) {
     if (e.key === 'Enter'){
-        console.log('fired');
         let searchQuery = searchBox.value;
         if (!searchQuery) { //Verify input is not null or undefined.
             alert("Invalid search. Is the search bar empty?");
